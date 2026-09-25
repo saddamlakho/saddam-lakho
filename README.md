@@ -15,41 +15,7 @@
 
 </div>
 
----
-
-## 🌟 Overview
-
-An Awwwards-level, hardware-accelerated **Cinematic 3D Personal Brand Portfolio** built for **Saddam Lakho** (Full-Stack Developer & AI Engineer). Features smooth scrub-driven video portals, ambient WebGL particles, a side-by-side interactive production workbench, and direct Nodemailer SMTP integration.
-
----
-
-## ✨ Key Features
-
-- **🎬 3-Stage Cinematic Video Scroller**:
-  - `intro_image.jpeg` $\to$ Smooth zoom portal transition ($0\% - 12\%$).
-  - `hero_video.mp4` $\to$ Tailored suit video ($12\% - 38\%$).
-  - `about_video.mp4` $\to$ Tech and developer craft sequence ($38\% - 65\%$).
-- **✨ Clean Minimal Landing**:
-  - Animated mouse pill & glowing golden prompt (*Scroll to Explore*).
-- **🎓 Academic Pedigree (BS Computer Science)**:
-  - Federal Urdu University of Arts, Science and Technology (`Class of 2025`).
-  - Core foundations in Algorithms, Distributed Architectures, Database Systems, and Neural Logic.
-- **⚡ Interconnected Skills Matrix (15 Core Capabilities)**:
-  - Interactive category filters: *All*, *Frontend & UI*, *Backend & Data*, *AI & Engineering*, and *Design & Creative* (including Adobe Photoshop & Adobe Illustrator).
-- **💼 Side-by-Side Systems & Projects Workbench**:
-  - 7 Production systems with real-time inspection console, telemetry metrics, and architectural breakdown:
-    1. **E-Leaflet Management System** (Digital Health & Doc Control)
-    2. **SOP Management System** (Enterprise Governance)
-    3. **QR Code Management System** (Smart Hardware & Tracking)
-    4. **SMM Campaign Ecosystem** (Media & Analytics)
-    5. **Document Review System** (Enterprise Collaboration)
-    6. **AI SOP Chatbot** (Artificial Intelligence & RAG)
-    7. **Digital Restaurant System** (Hospitality & Realtime Operations)
-- **✉️ Unlimited Direct Nodemailer Integration**:
-  - Built-in Next.js App Router API route (`/api/contact`) connecting directly to Gmail SMTP.
-  - Form validations, live transmission spinner, and celebratory confetti.
-- **🎨 Real-Time Theme Studio**:
-  - Live color palette customizer (Champagne Gold, Emerald, Cyberpunk, Royal Blue, Obsidian).
+  
 
 ---
 
@@ -67,28 +33,18 @@ An Awwwards-level, hardware-accelerated **Cinematic 3D Personal Brand Portfolio*
 
 ## 🚀 Quick Start
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/saddam-lakho-portfolio.git
-cd saddam-lakho-portfolio
+
 ```
 
-### 2. Install Dependencies
+### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-### 3. Setup Environment Variables
-Create a `.env.local` file in the project root:
-```env
-# Your Gmail where inquiries will arrive
-GMAIL_USER=saddamlakho09@gmail.com
 
-# 16-character Google App Password (from myaccount.google.com/apppasswords)
-GMAIL_APP_PASSWORD=your_16_character_app_password
 ```
 
-### 4. Run Development Server
+### 2. Run Development Server
 ```bash
 npm run dev
 ```
