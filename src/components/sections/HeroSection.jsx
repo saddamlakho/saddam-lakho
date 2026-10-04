@@ -16,28 +16,28 @@ export default function HeroSection({ lenisRef, scrollProgress = 0 }) {
     }
   };
 
-  // Fade out smoothly as user begins scrolling (0.00 to 0.12)
-  const indicatorOpacity = scrollProgress > 0.02
-    ? Math.max(0, 1 - (scrollProgress - 0.02) * 12)
+  // Fade out smoothly as user begins scrolling (0.00 to 0.08)
+  const indicatorOpacity = scrollProgress > 0.015
+    ? Math.max(0, 1 - (scrollProgress - 0.015) * 14)
     : 1;
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col justify-end items-center pb-12 sm:pb-16 z-20 pointer-events-none">
+    <section className="relative min-h-[100dvh] w-full flex flex-col justify-end items-center pb-6 sm:pb-10 md:pb-14 z-20 pointer-events-none">
       
-      {/* ONLY ANIMATED SCROLL INDICATOR ON HOME LANDING */}
+      {/* ANIMATED SCROLL PROMPT ON 1ST PAGE */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: indicatorOpacity, y: 0 }}
-        transition={{ duration: 1, delay: 0.4 }}
-        className="flex flex-col items-center gap-3.5 pointer-events-auto cursor-pointer group"
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="flex flex-col items-center gap-2.5 sm:gap-3 pointer-events-auto cursor-pointer group select-none"
         onClick={handleScrollDown}
         data-cursor="SCROLL"
       >
         {/* Animated Mouse Pill */}
-        <div className="w-6 h-10 rounded-full border-2 border-primary/50 bg-black/40 backdrop-blur-md flex items-start justify-center p-1.5 shadow-[0_0_20px_-3px_var(--color-primary-glow)] group-hover:border-primary transition-all duration-300">
+        <div className="w-5 h-9 sm:w-6 sm:h-10 rounded-full border-2 border-primary/50 bg-black/50 backdrop-blur-md flex items-start justify-center p-1 sm:p-1.5 shadow-[0_0_20px_-3px_var(--color-primary-glow)] group-hover:border-primary transition-all duration-300">
           <motion.div
             animate={{
-              y: [0, 12, 0],
+              y: [0, 10, 0],
               opacity: [1, 0.2, 1],
             }}
             transition={{
@@ -50,13 +50,13 @@ export default function HeroSection({ lenisRef, scrollProgress = 0 }) {
         </div>
 
         {/* Text & Chevron Animation */}
-        <div className="flex flex-col items-center gap-1">
-          <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-slate-300 group-hover:text-primary transition-colors">
+        <div className="flex flex-col items-center gap-0.5">
+          <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.25em] sm:tracking-[0.3em] uppercase text-slate-300 group-hover:text-primary transition-colors">
             SCROLL TO EXPLORE
           </span>
           <motion.div
             animate={{
-              y: [0, 4, 0],
+              y: [0, 3, 0],
             }}
             transition={{
               duration: 1.5,
@@ -64,7 +64,7 @@ export default function HeroSection({ lenisRef, scrollProgress = 0 }) {
               ease: 'easeInOut',
             }}
           >
-            <ChevronDown className="w-4 h-4 text-primary/80 group-hover:text-primary transition-colors" />
+            <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary/80 group-hover:text-primary transition-colors" />
           </motion.div>
         </div>
       </motion.div>

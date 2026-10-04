@@ -31,7 +31,7 @@ export default function CinematicSequenceController({ scrollProgress = 0 }) {
     if (aboutVid) aboutVid.load();
   }, []);
 
-  // Main Canvas Render Loop (Full-Screen Immersive Cover)
+  // Main Canvas Render Loop (Original Full-Screen Immersive Cover)
   useEffect(() => {
     const canvas = canvasRef.current;
     const heroVid = heroVideoRef.current;

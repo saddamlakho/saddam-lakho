@@ -56,26 +56,29 @@ export default function Navigation({ scrollProgress, lenisRef }) {
     }
   };
 
+  // Only show the bottom floating dock once user scrolls past the clean hero landing (p > 0.05)
+  const isDockVisible = scrollProgress > 0.05;
+
   return (
     <>
       {/* Top Header Identity & Status */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 py-4 flex items-center justify-between pointer-events-none">
-        <div className="flex items-center gap-3 pointer-events-auto">
-          <div className="w-8 h-8 rounded-lg bg-bg-card border border-white/10 flex items-center justify-center font-display font-black text-sm tracking-wider text-primary shadow-lg backdrop-blur-md">
+      <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between pointer-events-none">
+        <div className="flex items-center gap-2.5 sm:gap-3 pointer-events-auto">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-bg-card border border-white/10 flex items-center justify-center font-display font-black text-xs sm:text-sm tracking-wider text-primary shadow-lg backdrop-blur-md">
             SL
           </div>
           <div>
-            <div className="text-xs font-display font-bold tracking-wider text-slate-100 uppercase">
+            <div className="text-[11px] sm:text-xs font-display font-bold tracking-wider text-slate-100 uppercase">
               SADDAM LAKHO
             </div>
-            <div className="text-[10px] font-mono text-slate-400 tracking-tight">
+            <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 tracking-tight">
               Full-Stack Developer · AI Engineer
             </div>
           </div>
         </div>
 
         {/* Top Right Controls: Theme Studio & Sound */}
-        <div className="flex items-center gap-2 pointer-events-auto">
+        <div className="flex items-center gap-1.5 sm:gap-2 pointer-events-auto">
           {/* Sound Toggle */}
           <button
             onClick={() => {
@@ -84,10 +87,10 @@ export default function Navigation({ scrollProgress, lenisRef }) {
               if (next) playSound('success', true);
             }}
             data-cursor="AUDIO"
-            className="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-slate-300 hover:text-primary transition-all duration-300 hover:scale-105"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full glass-panel flex items-center justify-center text-slate-300 hover:text-primary transition-all duration-300 hover:scale-105"
             title={soundEnabled ? 'Mute Audio' : 'Enable Ambient Audio Feedback'}
           >
-            {soundEnabled ? <Volume2 className="w-4 h-4 text-primary animate-pulse" /> : <VolumeX className="w-4 h-4 text-slate-400" />}
+            {soundEnabled ? <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary animate-pulse" /> : <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400" />}
           </button>
 
           {/* Realtime Colors Studio Trigger */}
@@ -97,53 +100,58 @@ export default function Navigation({ scrollProgress, lenisRef }) {
               setIsCustomizerOpen(true);
             }}
             data-cursor="THEME"
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel text-xs font-mono text-slate-300 hover:text-primary border-primary/20 hover:border-primary/50 transition-all duration-300 hover:scale-105"
+            className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full glass-panel text-[11px] sm:text-xs font-mono text-slate-300 hover:text-primary border-primary/20 hover:border-primary/50 transition-all duration-300 hover:scale-105"
           >
-            <div className="w-2.5 h-2.5 rounded-full shadow-[0_0_8px_var(--color-primary)]" style={{ backgroundColor: theme.primary }} />
+            <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full shadow-[0_0_8px_var(--color-primary)]" style={{ backgroundColor: theme.primary }} />
             <span className="hidden sm:inline font-sans text-xs">Theme Studio</span>
-            <Paintbrush className="w-3.5 h-3.5" />
+            <Paintbrush className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
           </button>
         </div>
       </header>
 
-      {/* Floating Bottom Navigation Dock */}
-      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
-        <motion.div 
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center gap-1 p-1.5 rounded-full glass-panel bg-[#090D16]/85 border-white/10 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.8)] backdrop-blur-xl"
-        >
-          {NAV_ITEMS.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeSection === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item)}
-                onMouseEnter={() => playSound('hover', soundEnabled)}
-                data-cursor={item.label.toUpperCase()}
-                className={`relative px-3 py-2 rounded-full text-xs font-medium transition-all duration-300 flex items-center gap-1.5 group ${
-                  isActive ? 'text-slate-100 font-semibold' : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeDockPill"
-                    className="absolute inset-0 rounded-full bg-white/10 border border-primary/40 shadow-[0_0_15px_-3px_var(--color-primary-glow)]"
-                    transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-                  />
-                )}
-                <Icon className={`w-3.5 h-3.5 relative z-10 transition-transform duration-300 ${isActive ? 'text-primary scale-110' : 'group-hover:scale-110'}`} />
-                <span className="relative z-10 hidden md:inline text-[11px] tracking-wide font-sans">{item.label}</span>
-              </button>
-            );
-          })}
-        </motion.div>
-      </nav>
+      {/* Floating Bottom Navigation Dock (Fades in when user scrolls, leaving 1st page 100% clean) */}
+      <AnimatePresence>
+        {isDockVisible && (
+          <motion.nav 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 50, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 pointer-events-auto max-w-[95vw]"
+          >
+            <div className="flex items-center gap-0.5 sm:gap-1 p-1 sm:p-1.5 rounded-full glass-panel bg-[#090D16]/90 border-white/10 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+              {NAV_ITEMS.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeSection === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavClick(item)}
+                    onMouseEnter={() => playSound('hover', soundEnabled)}
+                    data-cursor={item.label.toUpperCase()}
+                    className={`relative px-2 sm:px-3 py-1.5 sm:py-2 rounded-full text-xs font-medium transition-all duration-300 flex items-center gap-1.5 group ${
+                      isActive ? 'text-slate-100 font-semibold' : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeDockPill"
+                        className="absolute inset-0 rounded-full bg-white/10 border border-primary/40 shadow-[0_0_15px_-3px_var(--color-primary-glow)]"
+                        transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+                      />
+                    )}
+                    <Icon className={`w-3.5 h-3.5 relative z-10 transition-transform duration-300 ${isActive ? 'text-primary scale-110' : 'group-hover:scale-110'}`} />
+                    <span className="relative z-10 hidden md:inline text-[11px] tracking-wide font-sans">{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
 
       {/* Subtle Right Journey Progress Bar */}
-      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-center gap-3 pointer-events-none">
+      <div className="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-center gap-3 pointer-events-none">
         <span className="text-[9px] font-mono text-slate-500 transform -rotate-90 origin-center tracking-widest uppercase">
           JOURNEY
         </span>
